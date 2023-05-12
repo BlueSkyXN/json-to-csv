@@ -50,8 +50,13 @@ jobs:
       run: pyinstaller --onefile split_txt.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (sub-adh.py)
       run: pyinstaller --onefile sub-adh.py  --distpath dist/${{ matrix.os }}
-    - name: Upload
+    - name: Upload-Windows
       uses: actions/upload-artifact@v2
       with:
-        name: build
-        path: dist/*
+        name: build-Windows
+        path: dist/windows-2019/*
+    - name: Upload-Ubuntu
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-Ubuntu
+        path: dist/ubuntu-22.04/*
