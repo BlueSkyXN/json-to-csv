@@ -1,0 +1,17 @@
+这是一个Python脚本，用于将JSON查询日志转换为CSV格式。它使用了argparse库来解析命令行参数，pandas库用于处理数据，json库用于将JSON字符串转换为Python对象，以及os库用于获取输出文件的绝对路径。
+
+该脚本从命令行接受两个可选参数：-i或--input（输入文件的路径）和-o或--output（输出文件的路径）。如果这些参数没有指定，则会使用默认值'input.json'和'output.csv'。
+
+首先，脚本使用open()函数打开输入文件，并读取其内容。然后，它通过replace()方法将所有换行符替换为逗号，并将结果字符串包装在方括号中。接下来，使用json.loads()函数将字符串解析成Python对象并将其存储在变量data中。
+
+接着，使用pd.DataFrame()函数将data转换为pandas的DataFrame对象，并将其存储在变量df中。最后，使用to_csv()方法将DataFrame保存为CSV文件，并打印出保存文件的绝对路径。
+
+如果你想要指定输入和输出文件的路径，可以在命令行中使用-i和-o参数。例如，要将名为example.json的文件转换为名为results.csv的文件，可以运行以下命令：
+
+python jtc-adh-cmd.py -i example.json -o results.csv
+
+这将把example.json中的内容转换为一个pandas DataFrame，并将其保存到results.csv文件中。
+
+也可以是绝对路径
+
+python C:\Users\SKY\Documents\GitHub\json-to-csv\jtc-adh-cmd.py --input "C:\Users\SKY\Downloads\querylog.json"  --output "C:\Users\SKY\Downloads\querylog.csv"

@@ -5,21 +5,19 @@ import os
 
 # 创建一个ArgumentParser对象
 parser = argparse.ArgumentParser(description='Convert JSON query log to CSV format')
-print(f'debug0')
+#print(f'debug0')
 
 # 添加输入文件路径参数
-parser.add_argument('-i', '--input', type=str, default='querylog.json',required=False, help='Path to input JSON file')
-
-print(f'debug1')
+parser.add_argument('-i', '--input', type=str, default=os.path.expanduser("~/Desktop/input.json") ,required=False, help='Path to input JSON file')
+#print(f'debug1')
 
 # 添加输出文件路径参数
-parser.add_argument('-o', '--output', type=str, default='large_data.csv',required=False, help='Path to output CSV file')
-
-print(f'debug2')
+parser.add_argument('-o', '--output', type=str, default=os.path.expanduser("~/Desktop/output.csv") ,required=False, help='Path to output CSV file')
+#print(f'debug2')
 
 # 解析命令行参数
 args = parser.parse_args()
-print(f'debug3')
+#print(f'debug3')
 print(args.input, args.output)
 
 
