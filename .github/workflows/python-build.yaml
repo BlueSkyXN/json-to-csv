@@ -29,27 +29,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyinstaller # Install PyInstaller module
     - name: Build executable (jtc-adh-cmd-plus.py)
-      run: pyinstaller --onefile jtc-adh-cmd-plus.py
+      run: pyinstaller --onefile jtc-adh-cmd-plus.py --distpath dist/${{ matrix.os }}
     - name: Build executable (jtc-adh-cmd-plus2.py)
-      run: pyinstaller --onefile jtc-adh-cmd-plus2.py
+      run: pyinstaller --onefile jtc-adh-cmd-plus2.py --distpath dist/${{ matrix.os }}
     - name: Build executable (jtc-adh-cmd.py)
-      run: pyinstaller --onefile jtc-adh-cmd.py
+      run: pyinstaller --onefile jtc-adh-cmd.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (jtc-adh-easy.py)
-      run: pyinstaller --onefile jtc-adh-easy.py
+      run: pyinstaller --onefile jtc-adh-easy.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (merge_csv.py)
-      run: pyinstaller --onefile merge_csv.py
+      run: pyinstaller --onefile merge_csv.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (scan-to-config.py)
-      run: pyinstaller --onefile scan-to-config.py
+      run: pyinstaller --onefile scan-to-config.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (split_csv.py)
-      run: pyinstaller --onefile split_csv.py
+      run: pyinstaller --onefile split_csv.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (split_json-adh.py)
-      run: pyinstaller --onefile split_json-adh.py
+      run: pyinstaller --onefile split_json-adh.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (split_json.py)
-      run: pyinstaller --onefile split_json.py
+      run: pyinstaller --onefile split_json.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (split_txt.py)
-      run: pyinstaller --onefile split_txt.py
+      run: pyinstaller --onefile split_txt.py  --distpath dist/${{ matrix.os }}
     - name: Build executable (sub-adh.py)
-      run: pyinstaller --onefile sub-adh.py
+      run: pyinstaller --onefile sub-adh.py  --distpath dist/${{ matrix.os }}
     - name: Upload
       uses: actions/upload-artifact@v2
       with:
