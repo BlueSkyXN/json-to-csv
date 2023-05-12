@@ -52,4 +52,15 @@ jobs:
       with:
         name: build-out
         path: ./dist/*.exe
+    - name: Upload artifacts 2
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-out
+        path: dist/*.exe
+    - name: Upload artifacts 3
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-out
+        path: dist/*
+    
     
