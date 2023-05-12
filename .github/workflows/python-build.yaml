@@ -10,8 +10,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-2019, ubuntu-latest]
-        script: 
+        os: [windows-latest, ubuntu-latest]
+      script: 
           - jtc-adh-cmd-plus.py
           - jtc-adh-cmd-plus2.py
           - jtc-adh-cmd.py
@@ -55,7 +55,3 @@ jobs:
       ARCH_WINDOWS: 'x64'
       ARCH_UBUNTU: 'x64'
 
-    matrix:
-      arch:
-        - ${{ env.ARCH_WINDOWS }}
-        - ${{ env.ARCH_UBUNTU }}
