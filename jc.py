@@ -1,8 +1,10 @@
 import pandas as pd
 import json
+import os
 
 # 读取JSON文件并处理
-with open('querylog.json', 'r') as f:
+input_path = 'querylog.json'
+with open(input_path, 'r') as f:
     content = f.read().replace('\n', ',')
     json_content = f'[{content[:-1]}]'
 
@@ -12,4 +14,9 @@ data = json.loads(json_content)
 df = pd.DataFrame(data)
 
 # 将数据保存为CSV文件
-df.to_csv('large_data.csv', index=False)
+output_path = 'large_data.csv'
+abs_output_path = os.path.abspath(output_path)
+df.to_csv(abs_output_path, index=False)
+
+# 输出保存路径
+print(f'已将JSON数据成功转换并保存到文件：{abs_output_path}')
