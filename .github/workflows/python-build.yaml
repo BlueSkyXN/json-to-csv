@@ -24,9 +24,9 @@ jobs:
           - split_txt.py
           - sub-adh.py
         env:
-          ARCH_WINDOWS: 'x64'
-          ARCH_UBUNTU: 'x64'
-      include:
+          - ARCH_WINDOWS: 'x64'
+          - ARCH_UBUNTU: 'x64'
+        include:
         - arch: ${{ env.ARCH_WINDOWS }}
         - arch: ${{ env.ARCH_UBUNTU }}
     steps:
