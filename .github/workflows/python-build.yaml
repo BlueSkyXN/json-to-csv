@@ -46,3 +46,10 @@ jobs:
       run: pyinstaller --onefile split_txt.py
     - name: Build executable (sub-adh.py)
       run: pyinstaller --onefile sub-adh.py
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-out
+        path: /home/runner/work/json-to-csv/json-to-csv/dist/*.exe
+    

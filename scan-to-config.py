@@ -8,7 +8,7 @@ current_dir = os.getcwd()
 FILES_DIR = os.path.join(current_dir)
 
 # Define the path to your output YAML file
-OUTPUT_FILE = os.path.join(current_dir, ".github/workflows/auto-build.yaml")
+OUTPUT_FILE = os.path.join(current_dir, ".github/workflows/auto-build.txt")
 
 
 def main():
