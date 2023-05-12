@@ -35,8 +35,7 @@ with open(args.input) as f:
     while True:
         # 确定输出文件路径
         output_path = os.path.join(args.output_dir, f"output_{i}.txt")
-        
-        # 将块保存为文本文件
+
         with open(output_path, 'w') as f_out:
             data = []
             for j, line in tqdm(enumerate(f), total=chunk_size, desc=f"Converting chunk {i+1}"):
@@ -47,23 +46,23 @@ with open(args.input) as f:
             # 如果当前块不为空，则保存文本文件并转换为CSV格式
             if len(data) > 0:
                 f_out.write('\n'.join(data))
-                
+
                 # 转换为CSV格式并将结果保存到输出目录
                 with open(output_path) as f_in:
                     df = pd.read_json(f_in, lines=True)
-                
+
                 # 如果当前文件中包含有效数据，则保存为CSV文件
                 if len(df) > 0:
                     abs_output_path = os.path.abspath(os.path.join(args.output_dir, f"output_{i}.csv"))
-                    with open(abs_output_path, 'w') as f_out:
-                        df.to_csv(f_out, index=False)
+                    with open(abs_output_path, 'w') as f_out_csv:
+                        df.to_csv(f_out_csv, index=False)
 
                     print(f"{abs_output_path} ({os.path.getsize(abs_output_path) / (1024 * 1024):.2f} MB)")
-                    
+
                 else:
                     print(f"{output_path} is empty, removing file")
                     os.remove(output_path)
-            
+
             # 如果当前块为空，则删除该文件
             else:
                 print(f"{output_path} is empty, removing file")
