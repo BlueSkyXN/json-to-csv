@@ -10,19 +10,17 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        build: [linux, macos, windows]
+        build: [linux, windows]
         include:
           - build: linux
             os: ubuntu-18.04
-          - build: macos
-            os: macos-latest
           - build: windows
             os: windows-2019
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2.4.4
+      uses: actions/checkout@v2
     - name: Set up Python
-      uses: actions/setup-python@v2.4.4
+      uses: actions/setup-python@v2
       with:
         python-version: '3.x' # Use the Python version you need to build your project
         architecture: 'x64'  # Use the architecture of your choice
@@ -53,7 +51,7 @@ jobs:
     - name: Build executable (sub-adh.py)
       run: pyinstaller --onefile sub-adh.py
     - name: Upload
-      uses: actions/upload-artifact@v2.4.4
+      uses: actions/upload-artifact@v2
       with:
         name: build-out
         path: dist/*
