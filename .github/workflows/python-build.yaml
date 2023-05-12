@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
-      script: 
+        script: 
           - jtc-adh-cmd-plus.py
           - jtc-adh-cmd-plus2.py
           - jtc-adh-cmd.py
@@ -23,39 +23,37 @@ jobs:
           - split_json.py
           - split_txt.py
           - sub-adh.py
+      env:
+        ARCH_WINDOWS: 'x64'
+        ARCH_UBUNTU: 'x64'
+      matrix:
+        arch:
+          - ${{ env.ARCH_WINDOWS }}
+          - ${{ env.ARCH_UBUNTU }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
-        architecture: ${{ matrix.arch }}
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pyinstaller
-    
-    # Build executable for each script in the matrix
-    - name: Build executable
-      run: |
-        for file in "${{ matrix.script }}" ; do
-            pyinstaller --onefile "$file"
-        done
-
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: build-output
-        path: dist/*
-
-    env:
-      ARCH_WINDOWS: 'x64'
-      ARCH_UBUNTU: 'x64'
-
-    matrix:
-      arch:
-        - ${{ env.ARCH_WINDOWS }}
-        - ${{ env.ARCH_UBUNTU }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+          architecture: ${{ matrix.arch }}
+        
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+      
+      # Build executable for each script in the matrix
+      - name: Build executable
+        run: |
+          for file in "${{ matrix.script }}" ; do
+              pyinstaller --onefile "$file"
+          done
+  
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-output
+          path: dist/*
