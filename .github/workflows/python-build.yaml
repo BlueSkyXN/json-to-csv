@@ -23,13 +23,12 @@ jobs:
           - split_json.py
           - split_txt.py
           - sub-adh.py
-      env:
-        ARCH_WINDOWS: 'x64'
-        ARCH_UBUNTU: 'x64'
-      matrix:
-        arch:
-          - ${{ env.ARCH_WINDOWS }}
-          - ${{ env.ARCH_UBUNTU }}
+        env:
+          ARCH_WINDOWS: 'x64'
+          ARCH_UBUNTU: 'x64'
+      include:
+        - arch: ${{ env.ARCH_WINDOWS }}
+        - arch: ${{ env.ARCH_UBUNTU }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
