@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest]
+        os: [windows-2019, ubuntu-latest]
         script: 
           - jtc-adh-cmd-plus.py
           - jtc-adh-cmd-plus2.py
@@ -41,8 +41,8 @@ jobs:
     # Build executable for each script in the matrix
     - name: Build executable
       run: |
-        for file in "${{ matrix.script[@] }}"; do
-            pyinstaller --onefile "${file}"
+        for file in "${{ matrix.script }}" ; do
+            pyinstaller --onefile "$file"
         done
 
     - name: Upload artifacts
