@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
-        script: 
+      script: 
           - jtc-adh-cmd-plus.py
           - jtc-adh-cmd-plus2.py
           - jtc-adh-cmd.py
