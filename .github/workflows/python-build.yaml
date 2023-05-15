@@ -29,27 +29,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install pyinstaller # Install PyInstaller module
     - name: Build executable
-      run: pyinstaller --onefile jtc-adh-cmd-plus.py --distpath dist/${{ matrix.os }}
+      run: pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip jtc-adh-cmd-plus.py --distpath dist/${{ matrix.os }}
 
-           pyinstaller --onefile jtc-adh-cmd-plus2.py --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip jtc-adh-cmd-plus2.py --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile jtc-adh-cmd.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip jtc-adh-cmd.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile jtc-adh-easy.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip jtc-adh-easy.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile merge_csv.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip merge_csv.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile scan-to-config.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip scan-to-config.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile split_csv.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip split_csv.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile split_json-adh.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip split_json-adh.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile split_json.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip split_json.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile split_txt.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip split_txt.py  --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile sub-adh.py  --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip sub-adh.py  --distpath dist/${{ matrix.os }}
 
     - name: Upload-${{ matrix.os }}
       uses: actions/upload-artifact@v2
