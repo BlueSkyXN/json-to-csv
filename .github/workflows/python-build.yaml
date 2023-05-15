@@ -57,6 +57,11 @@ jobs:
            
            pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip sub-adh.py  --distpath dist/${{ matrix.os }}
 
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip sub-adh-ultra.py  --distpath dist/${{ matrix.os }}
+
+           pyinstaller --onefile --hidden-import argparse --hidden-import os --hidden-import tqdm  --strip split_txt-ultra.py  --distpath dist/${{ matrix.os }}
+
+          
     - name: Upload-${{ matrix.os }}
       uses: actions/upload-artifact@v2
       with:
