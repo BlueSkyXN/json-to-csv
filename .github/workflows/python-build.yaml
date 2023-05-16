@@ -42,7 +42,8 @@ jobs:
 
       - name: Generate requirements.txt
         run: |
-           pipreqs --force .  # 根据项目中的代码生成requirements.txt文件
+           pipreqs --force . --encoding=utf-8
+          # 根据项目中的代码生成requirements.txt文件
 
       - name: Install dependencies
         run: |
