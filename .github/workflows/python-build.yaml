@@ -37,15 +37,16 @@ jobs:
       - name: Set commit message
         id: set_commit
         run: |
-         if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
-         echo "COMMIT_MESSAGE=$(git log --format=%B -1)" >> $GITHUB_ENV
-         elif [ "${{ matrix.os }}" == "windows-2019" ]; then
-         $commit_message=$(git log --format=%B -1)
-         echo "COMMIT_MESSAGE=$commit_message" >> $GITHUB_ENV
-         fi
+          if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
+            echo "COMMIT_MESSAGE=$(git log --format=%B -1)" >> $GITHUB_ENV
+          elif [ "${{ matrix.os }}" == "windows-2019" ]; then
+            commit_message=$(git log --format=%B -1)
+            echo "COMMIT_MESSAGE=$commit_message" >> $GITHUB_ENV
+          fi
         shell: bash
         env:
           pythonLocation: /opt/hostedtoolcache/Python/3.10.11/x64
+
 
 
       - name: Upload-jtc-adh-cmd-plus-ubuntu-22.04
