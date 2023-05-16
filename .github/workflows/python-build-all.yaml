@@ -1,0 +1,76 @@
+name: Python Building ALL
+
+on:
+  #push:
+    #branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        build: [linux, windows]
+        include:
+          - build: linux
+            os: ubuntu-22.04
+          - build: windows
+            os: windows-2019
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.10' 
+        architecture: 'x64'  
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller argparse pandas tqdm ijson vaex --ignore-installed
+    - name: Build executable
+      run: pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip jtc-adh-cmd-plus.py --distpath dist/${{ matrix.os }}
+
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --hidden-import ijson --strip jtc-adh-cmd-plus2.py --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --strip jtc-adh-cmd-plus3.py --distpath dist/${{ matrix.os }}
+
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --strip jtc-adh-cmd-plus4.py --distpath dist/${{ matrix.os }}
+
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --hidden-import itertools.islice --strip jtc-adh-cmd-ultra.py --distpath dist/${{ matrix.os }}
+
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --strip jtc-adh-cmd.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile  --hidden-import pandas --hidden-import os  --hidden-import json --strip jtc-adh-easy.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip merge_csv.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import os  --strip scan-to-config.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --strip split_csv.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import argparse  --hidden-import os --hidden-import tqdm --hidden-import json --strip split_json-adh.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import argparse  --hidden-import os --hidden-import tqdm --hidden-import json --strip split_json.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import argparse  --hidden-import os --hidden-import tqdm  --strip split_txt.py  --distpath dist/${{ matrix.os }}
+           
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip sub-adh.py  --distpath dist/${{ matrix.os }}
+
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip sub-adh-ultra.py  --distpath dist/${{ matrix.os }}
+
+           pyinstaller --onefile --hidden-import argparse --hidden-import os --hidden-import tqdm  --strip split_txt-ultra.py  --distpath dist/${{ matrix.os }}
+ 
+           pyinstaller --onefile --hidden-import argparse --hidden-import os --hidden-import vaex --strip jtc-adh-cmd-ultra-vaex.py  --distpath dist/${{ matrix.os }} 
+
+    - name: Get latest commit message
+      id: get_commit
+      run: |
+        echo "::set-output name=message::$(git log --format=%B -1)"
+
+    - name: Upload-${{ matrix.os }}
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-standard-${{ matrix.os }}-${{ steps.get_commit.outputs.message }}
+        path: dist/${{ matrix.os }}/*
