@@ -1,4 +1,4 @@
-name: Python Building
+name: Python Building MINI
 
 on:
   push:
