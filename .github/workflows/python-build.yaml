@@ -37,7 +37,13 @@ jobs:
       - name: Set commit message
         id: set_commit
         run: |
-          echo "COMMIT_MESSAGE=$(git log --format=%B -1)" >> $GITHUB_ENV
+          if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then
+            echo "COMMIT_MESSAGE=$(git log --format=%B -1)" >> $GITHUB_ENV
+          elif [ "${{ matrix.os }}" == "windows-2019" ]; then
+            $commit_message = git log --format=%B -1
+            echo "COMMIT_MESSAGE=$commit_message" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          fi
+
 
       - name: Upload-jtc-adh-cmd-plus-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
