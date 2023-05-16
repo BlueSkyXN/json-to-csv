@@ -34,6 +34,8 @@ jobs:
     - name: Install dependencies
       run: |
         pipenv install
+        pipenv run pip install pyinstaller  --ignore-installed
+
 
     - name: Build executable
       run: |
