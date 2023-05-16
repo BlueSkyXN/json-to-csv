@@ -162,7 +162,8 @@ jobs:
 
       - name: Set Build Name
         id: set_build_name
-        run: echo "BUILD_NAME=jtc-adh-cmd-plus3" >> $GITHUB_ENV
+        run: 
+          echo "BUILD_NAME=jtc-adh-cmd-plus3" >> $GITHUB_ENV
 
       - name: Set commit message
         id: set_commit
