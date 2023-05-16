@@ -1,7 +1,7 @@
 name: Python Building Quick Cached
 
 on:
-  push:
+  #push:
     #branches: [ main ]
   workflow_dispatch:
 
