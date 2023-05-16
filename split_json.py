@@ -1,4 +1,3 @@
-# https://github.com/BlueSkyXN/json-to-csv
 import json
 import os
 import argparse

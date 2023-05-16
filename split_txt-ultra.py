@@ -1,4 +1,3 @@
-# https://github.com/BlueSkyXN/json-to-csv
 import os
 import argparse
 from tqdm import tqdm

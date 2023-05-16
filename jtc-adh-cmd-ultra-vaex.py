@@ -1,4 +1,3 @@
-# https://github.com/BlueSkyXN/json-to-csv
 import vaex
 import argparse
 import os

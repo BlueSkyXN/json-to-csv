@@ -1,4 +1,3 @@
-# https://github.com/BlueSkyXN/json-to-csv
 import ijson
 import json
 import pandas as pd
