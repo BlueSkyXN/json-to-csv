@@ -60,10 +60,21 @@ jobs:
            pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip sub-adh-ultra.py  --distpath dist/${{ matrix.os }}
 
            pyinstaller --onefile --hidden-import argparse --hidden-import os --hidden-import tqdm  --strip split_txt-ultra.py  --distpath dist/${{ matrix.os }}
+    
+    - name: Get latest commit name
+      run: |
+             # Get the SHA of the latest commit
+             commit_sha=$(git rev-parse HEAD)
 
-          
+             # Get the commit message for the latest commit
+             commit_message=$(git log -1 --pretty=%B $commit_sha)
+
+             # Use the commit message as the artifact name
+             echo "::set-env name=ARTIFACT_NAME::build-${{ matrix.os }}-$commit_message"
+
     - name: Upload-${{ matrix.os }}
+      if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: build-${{ matrix.os }}
+        name: build-${{ matrix.os }}-${{ env.ARTIFACT_NAME }}
         path: dist/${{ matrix.os }}/*
