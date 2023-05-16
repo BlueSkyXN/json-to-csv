@@ -74,5 +74,5 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v2
       with:
-        name: build-${{ matrix.os }}-${{ steps.get_commit.outputs.message }}
+        name: build-cached-${{ matrix.os }}-${{ steps.get_commit.outputs.message }}
         path: dist/${{ matrix.os }}/*
