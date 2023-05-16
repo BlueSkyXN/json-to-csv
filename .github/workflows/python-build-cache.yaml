@@ -17,7 +17,7 @@ jobs:
             pip_cache_dir: ~/.cache/pip
           - build: windows
             os: windows-2019
-            pip_cache_dir: ~/.cache/pip
+            pip_cache_dir: ${{ env.APPDATA }}\pip\Cache
 
     steps:
     - name: Checkout code
@@ -28,6 +28,7 @@ jobs:
       with:
         python-version: '3.10'
         architecture: 'x64' 
+
 
     - name: Set pip cache dir
       id: pip-cache
@@ -55,9 +56,9 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        key: ${{ runner.os }}-pip
         restore-keys: |
-            ${{ runner.os }}-pip-
+            ${{ runner.os }}-pip
 
 
 
