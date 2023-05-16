@@ -60,14 +60,14 @@ jobs:
         run: |
           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip jtc-adh-cmd-plus.py --distpath dist/${{ matrix.os }}
 
-      - name: Upload-jtc-adh-cmd-plus-ubuntu-22.04
+      - name: Upload-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         uses: actions/upload-artifact@v3
         with:
           name: build_jtc-adh-cmd-plus_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
           path: dist/ubuntu-22.04/jtc-adh-cmd-plus
 
-      - name: Upload-jtc-adh-cmd-plus-windows-2019
+      - name: Upload-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
         uses: actions/upload-artifact@v3
         with:
@@ -92,6 +92,7 @@ jobs:
         with:
           python-version: '3.10'
           architecture: 'x64'
+
       - name: Set commit message
         id: set_commit
         run: |
@@ -127,18 +128,16 @@ jobs:
           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip jtc-adh-cmd-plus2.py --distpath dist/${{ matrix.os }}
 
  
-
-
-      - name: Upload-jtc-adh-cmd-plus2-ubuntu-22.04
+      - name: Upload-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus2v${{ matrix.os }}_v${{ steps.get_commit.outputs.message }}
+          name: build_jtc-adh-cmd-plus2_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
           path: dist/ubuntu-22.04/jtc-adh-cmd-plus2
 
-      - name: Upload-jtc-adh-cmd-plus-windows-2019
+      - name: Upload-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus2_${{ matrix.os }}_v${{ steps.get_commit.outputs.message }}
+          name: build_jtc-adh-cmd-plus2_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
           path: dist/windows-2019/jtc-adh-cmd-plus2.exe
