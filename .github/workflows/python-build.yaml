@@ -1,8 +1,8 @@
 name: Python Building
 
 on:
-  #push:
-    #branches: [ main ]
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -67,6 +67,7 @@ jobs:
       id: get_commit
       run: |
         echo "::set-output name=message::$(git log --format=%B -1)"
+
     - name: Upload-${{ matrix.os }}
       if: always()
       uses: actions/upload-artifact@v2
