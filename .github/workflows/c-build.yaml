@@ -1,0 +1,33 @@
+name: C building
+
+on:
+  push:
+    branches:
+      - main # run workflow on push to the main branch
+    
+jobs:
+  build:
+    runs-on: windows-2019 # set the operating system for the job
+
+    steps:
+    - name: Checkout code # checkout the code from your repository
+      uses: actions/checkout@v2
+
+    - name: Set up MSVC tools # install the Microsoft Visual C++ Build Tools
+      uses: microsoft/setup-msvc@v1.6.0
+      
+    - name: Set up environment # set up environment variables
+      run: |
+        set CC=cl.exe
+        set CFLAGS=/nologo /W3 /MT /O2 /Oi /Gy
+        
+    - name: Build executable # build your executable using MSVC
+      run: |
+        cl.exe /c /Fo:C:\jtc-adh-cmd-c.obj C:\jtc-adh-cmd-c.c
+        link.exe /OUT:C:\jtc-adh-cmd-c.exe C:\jtc-adh-cmd-c.obj
+        
+    - name: Save artifact # save the executable as an artifact for later use
+      uses: actions/upload-artifact@v2
+      with:
+        name: C-build
+        path: C:\jtc-adh-cmd-c.exe
