@@ -14,12 +14,11 @@ jobs:
         include:
           - build: linux
             os: ubuntu-22.04
-            env:
-              pip_cache_dir: ~/.cache/pip
+            pip_cache_dir: ~/.cache/pip
           - build: windows
             os: windows-2019
-            env:
-              pip_cache_dir: ~\AppData\Local\pip\Cache
+            pip_cache_dir: ~/.cache/pip
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -30,10 +29,14 @@ jobs:
         python-version: '3.10'
         architecture: 'x64' 
 
+    - name: Set pip cache dir
+      id: pip-cache
+      run: echo "::set-output name=dir::$(echo ${{ matrix.pip_cache_dir }})"
+
     - name: Cache Python packages
       uses: actions/cache@v2
       with:
-        path: ${{ matrix.pip_cache_dir }}
+        path: ${{ steps.pip-cache.outputs.dir }}
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
