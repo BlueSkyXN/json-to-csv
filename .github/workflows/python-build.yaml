@@ -140,7 +140,6 @@ jobs:
           name: build_jtc-adh-cmd-plus2_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
           path: dist/windows-2019/jtc-adh-cmd-plus2.exe
 
-
   build-jtc-adh-cmd-plus3:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -159,13 +158,6 @@ jobs:
         with:
           python-version: '3.10'
           architecture: 'x64'
-
-      - name: Set Build Name
-        id: set_build_name
-        run: 
-          echo "BUILD_NAME=jtc-adh-cmd-plus3" >> $GITHUB_ENV
-          echo $BUILD_NAME
-          echo ${{ env.BUILD_NAME }}
 
       - name: Set commit message
         id: set_commit
@@ -198,17 +190,21 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip ${{ env.BUILD_NAME }}.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip jtc-adh-cmd-plus3.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_${{ env.BUILD_NAME }}_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/${{ env.BUILD_NAME }}
+          name: build_jtc-adh-cmd-plus3_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/jtc-adh-cmd-plus3
+
       - name: Upload-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_${{ env.BUILD_NAME }}_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/${{ env.BUILD_NAME }}.exe
+          name: build_jtc-adh-cmd-plus3_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/jtc-adh-cmd-plus3.exe
+
+
+ 
