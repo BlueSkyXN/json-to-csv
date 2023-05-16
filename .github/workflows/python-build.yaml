@@ -61,16 +61,18 @@ jobs:
 
            pyinstaller --onefile --hidden-import argparse --hidden-import os --hidden-import tqdm  --strip split_txt-ultra.py  --distpath dist/${{ matrix.os }}
     
+
+
     - name: Get latest commit name
       run: |
-             # Get the SHA of the latest commit
+             # 获取最新提交的 SHA
              commit_sha=$(git rev-parse HEAD)
 
-             # Get the commit message for the latest commit
+             # 获取最新提交的提交消息
              commit_message=$(git log -1 --pretty=%B $commit_sha)
 
-             # Use the commit message as the artifact name
-             echo "::set-env name=ARTIFACT_NAME::build-${{ matrix.os }}-$commit_message"
+             # 使用提交消息作为构件名称并将其写入 .env 文件
+             echo "ARTIFACT_NAME=build-${{ matrix.os }}-$commit_message" >> .env
 
     - name: Upload-${{ matrix.os }}
       if: always()
@@ -78,3 +80,5 @@ jobs:
       with:
         name: build-${{ matrix.os }}-${{ env.ARTIFACT_NAME }}
         path: dist/${{ matrix.os }}/*
+      env:
+        ARTIFACT_NAME: ${{ secrets.ARTIFACT_NAME }}
