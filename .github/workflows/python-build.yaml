@@ -18,9 +18,9 @@ jobs:
             os: windows-2019
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.10'
           architecture: 'x64'
@@ -53,14 +53,14 @@ jobs:
 
       - name: Upload-jtc-adh-cmd-plus-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build-jtc-adh-cmd-plus-${{ matrix.os }}-v${{ env.COMMIT_MESSAGE }}
           path: dist/ubuntu-22.04/jtc-adh-cmd-plus
 
       - name: Upload-jtc-adh-cmd-plus-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build-jtc-adh-cmd-plus-${{ matrix.os }}-v${{ env.COMMIT_MESSAGE }}
           path: dist/windows-2019/jtc-adh-cmd-plus.exe
@@ -77,9 +77,9 @@ jobs:
             os: windows-2019
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: '3.10'
           architecture: 'x64'
@@ -109,14 +109,14 @@ jobs:
 
       - name: Upload-jtc-adh-cmd-plus2-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build-jtc-adh-cmd-plus2-${{ matrix.os }}-v${{ steps.get_commit.outputs.message }}
           path: dist/ubuntu-22.04/jtc-adh-cmd-plus2
 
       - name: Upload-jtc-adh-cmd-plus-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build-jtc-adh-cmd-plus2-${{ matrix.os }}-v${{ steps.get_commit.outputs.message }}
           path: dist/windows-2019/jtc-adh-cmd-plus2.exe
