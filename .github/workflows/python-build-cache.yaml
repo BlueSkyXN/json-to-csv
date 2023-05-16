@@ -17,7 +17,7 @@ jobs:
             pip_cache_dir: ~/.cache/pip
           - build: windows
             os: windows-2019
-            pip_cache_dir: ${{ env.APPDATA }}\pip\Cache
+            pip_cache_dir: C:\hostedtoolcache\windows\Python\3.10.11\x64
 
     steps:
     - name: Checkout code
