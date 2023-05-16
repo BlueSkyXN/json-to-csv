@@ -34,23 +34,23 @@ jobs:
           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip jtc-adh-cmd-plus.py --distpath dist/${{ matrix.os }}
 
       # 其他步骤...
-      - name: Get latest commit message
-        id: get_commit
+      - name: Set commit message
+        id: set_commit
         run: |
-          echo "::set-output name=message::$(git log --format=%B -1)"
+          echo "COMMIT_MESSAGE=$(git log --format=%B -1)" >> $GITHUB_ENV
 
       - name: Upload-jtc-adh-cmd-plus-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         uses: actions/upload-artifact@v2
         with:
-          name: build-jtc-adh-cmd-plus-${{ matrix.os }}-v${{ steps.get_commit.outputs.message }}
+          name: build-jtc-adh-cmd-plus-${{ matrix.os }}-v${{ env.COMMIT_MESSAGE }}
           path: dist/ubuntu-22.04/jtc-adh-cmd-plus
 
       - name: Upload-jtc-adh-cmd-plus-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
         uses: actions/upload-artifact@v2
         with:
-          name: build-jtc-adh-cmd-plus-${{ matrix.os }}-v${{ steps.get_commit.outputs.message }}
+          name: build-jtc-adh-cmd-plus-${{ matrix.os }}-v${{ env.COMMIT_MESSAGE }}
           path: dist/windows-2019/jtc-adh-cmd-plus.exe
 
   build-jtc-adh-cmd-plus2:
