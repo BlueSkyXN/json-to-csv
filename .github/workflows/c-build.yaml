@@ -1,8 +1,8 @@
 name: C building
 
 on:
-  #push:
-    #branches:
+  push:
+    branches:
       - main # run workflow on push to the main branch
     
 jobs:
