@@ -1,6 +1,4 @@
 name: Python Building ALL
-  #push:
-    #branches: [ main ]
 
 on:
   workflow_dispatch:

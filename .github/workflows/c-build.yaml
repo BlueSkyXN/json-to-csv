@@ -1,15 +1,10 @@
 name: C building
 
-  #push:
-    #branches:
-      #- main # run workflow on push to the main branch
-    
+
 
 on:
-  #push:
-    #branches:
-      #- main # run workflow on push to the main branch
-  c
+
+  workflow_dispatch:
 
 jobs:
   build:
