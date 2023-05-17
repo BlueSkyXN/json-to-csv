@@ -1,1 +1,27 @@
-有空我也把我的知识库搬上来[大笑]00:17使用pyqt和其他python编译打包的可能也需要审查 https://blog.csdn.net/weixin_42182448/article/details/113654663确实是的，这些开源工具的开源协议都有其限定，在产品使用的时候是需要遵守的这个我看在公司的合规管控专项上，分配给具体的产品部门负责了。最近公司这个专项会议我也会参加，有具体咱们需要做的，再同步给你哈。目前咱们还是说关注在员工日常工作用到的软件的合规管理。但是他们桌面也是会装py这些开源工具，所以我想首先在我们软件平台上是说明仅是开源免费的工具软件，但是用于产品发布需要产品部门和法务确认合规
+import vaex
+import pandas as pd
+import argparse
+import os
+
+parser = argparse.ArgumentParser(description='Convert JSON file to CSV file')
+parser.add_argument('-i', '--input', type=str, default=os.path.expanduser("~/Desktop/input.json"), required=False, help='Path to input JSON file')
+parser.add_argument('-o', '--output', type=str, default=os.path.expanduser("~/Desktop/output.csv"), required=False, help='Path to output CSV file')
+parser.add_argument('-s', '--chunk_size', type=int, default=10000, required=False, help='Number of lines to process at a time')
+args = parser.parse_args()
+
+chunk_size = args.chunk_size
+
+# Create an empty Vaex DataFrame
+df_vaex = vaex.from_pandas(pd.DataFrame(), copy_index=False)
+
+# Read the input file in chunks using pandas, then convert each chunk to a Vaex DataFrame
+for chunk in pd.read_json(args.input, lines=True, chunksize=chunk_size):
+    df_vaex = df_vaex.concat(vaex.from_pandas(chunk, copy_index=False))
+
+abs_output_path = os.path.abspath(args.output)
+if os.path.isfile(abs_output_path):
+    df_vaex.export(abs_output_path, mode='a', header=False)
+else:
+    df_vaex.export(abs_output_path)
+
+print(f'Successfully converted {args.input} to {abs_output_path}')
