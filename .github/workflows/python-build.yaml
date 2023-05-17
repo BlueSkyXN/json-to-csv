@@ -365,11 +365,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse pandas ijson islice --ignore-installed
+          python -m pip install pyinstaller argparse pandas ijson itertools --ignore-installed
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools.islice jtc-adh-cmd-ultra.py --distpath dist/
+          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools jtc-adh-cmd-ultra.py --distpath dist/
 
       
       - name: Upload-ubuntu-22.04
