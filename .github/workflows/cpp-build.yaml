@@ -1,8 +1,8 @@
 name: C++ Building
 
 on:  
-  push:    
-    branches:      
+  #push:    
+    #branches:      
       - main  
   pull_request:
     branches:      
