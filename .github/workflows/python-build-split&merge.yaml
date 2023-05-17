@@ -158,7 +158,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build_split_json_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/v
+          path: dist/ubuntu-22.04/split_json
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
@@ -368,7 +368,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools sub-adh.py --distpath dist/
+          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools sub-adh.py --distpath dist/${{ matrix.os }}
 
       
       - name: Upload-ubuntu-22.04
@@ -423,7 +423,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile  --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os merge_csv.py --distpath dist/
+          pyinstaller --onefile  --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os merge_csv.py --distpath dist/${{ matrix.os }}
 
       
       - name: Upload-ubuntu-22.04

@@ -369,7 +369,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools jtc-adh-cmd-ultra.py --distpath dist/
+          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools jtc-adh-cmd-ultra.py --distpath dist/${{ matrix.os }}
 
       
       - name: Upload-ubuntu-22.04
@@ -424,7 +424,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile  --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os jtc-adh-cmd.py --distpath dist/
+          pyinstaller --onefile  --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os jtc-adh-cmd.py --distpath dist/${{ matrix.os }}
 
       
       - name: Upload-ubuntu-22.04
