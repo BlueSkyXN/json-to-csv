@@ -1,12 +1,11 @@
-name: Python Building
-
+name: Python Building Split and Merge
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 
 jobs:
-  build-jtc-adh-cmd-plus:
+  build-split_csv:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -44,23 +43,23 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --strip jtc-adh-cmd-plus.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --strip split_csv.py --distpath dist/${{ matrix.os }}
 
       - name: Upload-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd-plus
+          name: build_split_csv_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/split_csv
 
       - name: Upload-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd-plus.exe
+          name: build_split_csv_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/split_csv.exe
 
-  build-jtc-adh-cmd-plus2:
+  build-split_json-adh:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -98,23 +97,23 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip jtc-adh-cmd-plus2.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip split_json-adh.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus2_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd-plus2
+          name: build_split_json-adh_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/split_json-adh
 
       - name: Upload-windows-2019
         if: ${{ matrix.os == 'windows-2019' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus2_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd-plus2.exe
+          name: build_jsplit_json-adh_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/split_json-adh.exe
 
-  build-jtc-adh-cmd-plus3:
+  build-split_json:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -152,23 +151,23 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip jtc-adh-cmd-plus3.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip split_json.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus3_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd-plus3
+          name: build_split_json_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/v
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus3_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd-plus3.exe
+          name: build_split_json_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/split_json.exe
 
-  build-jtc-adh-cmd-plus4:
+  build-split_txt-ultra:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -206,23 +205,23 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip jtc-adh-cmd-plus4.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip split_txt-ultra.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus4_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd-plus4
+          name: build_split_txt-ultra_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/split_txt-ultra
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-plus4_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd-plus4.exe
+          name: build_split_txt-ultra_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/split_txt-ultra.exe
 
-  build-jtc-adh-cmd-ultra-vaex:
+  build-split_txt:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -260,23 +259,23 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas.pd --hidden-import vaex --hidden-import os --strip jtc-adh-cmd-ultra-vaex.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import pandas.pd --hidden-import vaex --hidden-import os --strip split_txt.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-ultra-vaex_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd-ultra-vaex
+          name: build_split_txt_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/jsplit_txt
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-ultra-vaex_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd-ultra-vaex.exe
+          name: build_split_txt_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/split_txt.exe
 
-  build-jtc-adh-cmd-ultra-vaex2:
+  build-sub-adh-ultra:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -314,24 +313,24 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import vaex --hidden-import os --strip jtc-adh-cmd-ultra-vaex2.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import vaex --hidden-import os --strip sub-adh-ultra.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-ultra-vaex2_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd-ultra-vaex2
+          name: build_sub-adh-ultra_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/sub-adh-ultra
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-ultra-vaex2_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd-ultra-vaex2.exe
+          name: build_sub-adh-ultra_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/sub-adh-ultra.exe
 
 
-  build-jtc-adh-cmd-ultra:
+  build-sub-adh:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -369,24 +368,24 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools jtc-adh-cmd-ultra.py --distpath dist/
+          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools sub-adh.py --distpath dist/
 
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-ultra_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd-ultra
+          name: build_sub-adh_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/sub-adh
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd-ultra_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd-ultra.exe
+          name: build_sub-adh_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/sub-adh.exe
 
-  build-jtc-adh-cmd:
+  build-merge_csv:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -424,22 +423,22 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile  --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os jtc-adh-cmd.py --distpath dist/
+          pyinstaller --onefile  --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os merge_csv.py --distpath dist/
 
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jtc-adh-cmd
+          name: build_merge_csv_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/ubuntu-22.04/merge_csv
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
         uses: actions/upload-artifact@v3
         with:
-          name: build_jtc-adh-cmd_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/windows-2019/jtc-adh-cmd.exe
+          name: build_merge_csv_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          path: dist/windows-2019/merge_csv.exe
 
 
  
