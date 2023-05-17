@@ -1,8 +1,7 @@
 name: Python Building
 
 on:
-  push:
-    branches: [ main ]
+
   workflow_dispatch:
 
 jobs:

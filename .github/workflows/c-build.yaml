@@ -1,10 +1,16 @@
 name: C building
 
-on:
-  push:
-    branches:
-      - main # run workflow on push to the main branch
+  #push:
+    #branches:
+      #- main # run workflow on push to the main branch
     
+
+on:
+  #push:
+    #branches:
+      #- main # run workflow on push to the main branch
+  c
+
 jobs:
   build:
     runs-on: windows-2019 # set the operating system for the job
