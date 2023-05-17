@@ -1,9 +1,6 @@
 name: C building
 
-
-
 on:
-
   workflow_dispatch:
 
 jobs:
