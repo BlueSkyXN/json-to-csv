@@ -266,7 +266,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build_split_txt_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
-          path: dist/ubuntu-22.04/jsplit_txt
+          path: dist/ubuntu-22.04/split_txt
 
       - name: Upload-windows-2019
         if: always() && matrix.os == 'windows-2019'
