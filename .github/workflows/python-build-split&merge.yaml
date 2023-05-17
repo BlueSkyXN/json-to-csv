@@ -83,7 +83,7 @@ jobs:
         run: |
                 if [ "${{ matrix.os }}" == "ubuntu-22.04" ]; then          
                 echo "COMMIT_MESSAGE=$(git log --format=%s -1)" >> $GITHUB_ENV        
-                elif [ "${{ matrix.os }}" == "windows-2019" ]; then
+                elif [ "${{ matrix.os }}" == "windows-2split_json019" ]; then
                 commit_message=$(git log --format=%s -1)          
                 echo "COMMIT_MESSAGE=$commit_message" >> $GITHUB_ENV        
                 fi      
@@ -93,11 +93,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse pandas ijson pandas --ignore-installed
+          python -m pip install pyinstaller argparse tqdm --ignore-installed
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip split_json-adh.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import tqdm --hidden-import os  --hidden-import json --strip split_json-adh.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: ${{ matrix.os == 'ubuntu-22.04' }}
@@ -110,7 +110,7 @@ jobs:
         if: ${{ matrix.os == 'windows-2019' }}
         uses: actions/upload-artifact@v3
         with:
-          name: build_jsplit_json-adh_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
+          name: build_split_json-adh_${{ matrix.os }}_v${{ env.COMMIT_MESSAGE }}
           path: dist/windows-2019/split_json-adh.exe
 
   build-split_json:
@@ -147,11 +147,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse pandas ijson pandas --ignore-installed
+          python -m pip install pyinstaller argparse tqdm --ignore-installed
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip split_json.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import os --hidden-import tqdm --hidden-import json --strip split_json.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
@@ -201,11 +201,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse pandas ijson pandas --ignore-installed
+          python -m pip install pyinstaller argparse tqdm --ignore-installed
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import ijson --hidden-import json --strip split_txt-ultra.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import tqdm --hidden-import os --strip split_txt-ultra.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
@@ -255,11 +255,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse vaex pandas --ignore-installed
+          python -m pip install pyinstaller argparse tqdm --ignore-installed
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import pandas.pd --hidden-import vaex --hidden-import os --strip split_txt.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import tqdm --hidden-import os --strip split_txt.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
@@ -309,11 +309,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse vaex --ignore-installed
+          python -m pip install pyinstaller argparse pandas tqdm --ignore-installed
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import argparse --hidden-import vaex --hidden-import os --strip sub-adh-ultra.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --strip sub-adh-ultra.py --distpath dist/${{ matrix.os }}
       
       - name: Upload-ubuntu-22.04
         if: always() && matrix.os == 'ubuntu-22.04'
@@ -364,11 +364,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse pandas ijson --ignore-installed
+          python -m pip install pyinstaller argparse pandas tqdm --ignore-installed
 
       - name: Build executable
         run: |
-          pyinstaller --onefile --hidden-import ijson --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import itertools sub-adh.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import pandas --hidden-import argparse --hidden-import os --hidden-import tqdm sub-adh.py --distpath dist/${{ matrix.os }}
 
       
       - name: Upload-ubuntu-22.04
@@ -423,7 +423,7 @@ jobs:
 
       - name: Build executable
         run: |
-          pyinstaller --onefile  --hidden-import json --hidden-import pandas --hidden-import argparse --hidden-import os merge_csv.py --distpath dist/${{ matrix.os }}
+          pyinstaller --onefile --hidden-import pandas --hidden-import argparse --hidden-import os merge_csv.py --distpath dist/${{ matrix.os }}
 
       
       - name: Upload-ubuntu-22.04
