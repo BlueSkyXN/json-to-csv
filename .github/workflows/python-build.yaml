@@ -256,7 +256,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse vaex pandas.pd --ignore-installed
+          python -m pip install pyinstaller argparse vaex pandas --ignore-installed
 
       - name: Build executable
         run: |
@@ -365,7 +365,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install pyinstaller argparse pandas ijson itertools.islice --ignore-installed
+          python -m pip install pyinstaller argparse pandas ijson itertools --ignore-installed
 
       - name: Build executable
         run: |
