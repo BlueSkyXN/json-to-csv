@@ -15,3 +15,6 @@ python jtc-adh-cmd.py -i example.json -o results.csv
 也可以是绝对路径
 
 python C:\Users\SKY\Documents\GitHub\json-to-csv\jtc-adh-cmd.py --input "C:\Users\SKY\Downloads\querylog.json"  --output "C:\Users\SKY\Downloads\querylog.csv"
+
+
+该文本是旧的，请注意时间
