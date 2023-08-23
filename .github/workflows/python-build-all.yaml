@@ -31,9 +31,9 @@ jobs:
 
            pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os --hidden-import tqdm --hidden-import json --hidden-import ijson --strip jtc-adh-cmd-plus2.py --distpath dist/${{ matrix.os }}
            
-           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --strip jtc-adh-cmd-plus3.py --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --strip dev/jtc-adh-cmd-plus3.py --distpath dist/${{ matrix.os }}
 
-           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --strip jtc-adh-cmd-plus4.py --distpath dist/${{ matrix.os }}
+           pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --strip dev/jtc-adh-cmd-plus4.py --distpath dist/${{ matrix.os }}
 
            pyinstaller --onefile --hidden-import argparse --hidden-import pandas --hidden-import os  --hidden-import json --hidden-import ijson --hidden-import itertools.islice --strip jtc-adh-cmd-ultra.py --distpath dist/${{ matrix.os }}
 
