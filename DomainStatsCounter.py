@@ -1,32 +1,14 @@
 import pandas as pd
 import argparse
-import csv
 from collections import Counter
 
 def main(input_file, output_file, chunksize):
     total_counts = Counter()
 
-    with open(input_file, 'r') as file:
-        reader = csv.reader(file)
-        
-        # 获取列名
-        columns = next(reader)
-        
-        # 逐块读取文件
-        chunk = []
-        for row in reader:
-            chunk.append(row)
-            if len(chunk) >= chunksize:
-                # 将每个块转换为DataFrame
-                df = pd.DataFrame(chunk, columns=columns)
-                # 统计"QH"列中域名的出现次数
-                total_counts.update(Counter(df['QH']))
-                chunk = []
-        
-        # 处理剩余的行
-        if chunk:
-            df = pd.DataFrame(chunk, columns=columns)
-            total_counts.update(Counter(df['QH']))
+    # 使用Pandas直接读取CSV文件的块
+    for chunk in pd.read_csv(input_file, chunksize=chunksize):
+        # 统计"QH"列中域名的出现次数
+        total_counts.update(Counter(chunk['QH']))
 
     # 将结果转换为DataFrame
     result_df = pd.DataFrame.from_dict(total_counts, orient='index').reset_index()
