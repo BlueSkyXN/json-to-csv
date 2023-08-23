@@ -12,11 +12,15 @@ args = parser.parse_args()
 chunk_size = args.chunk_size
 
 # Create an empty Vaex DataFrame
-df_vaex = vaex.from_pandas(pd.DataFrame(), copy_index=False)
+df_vaex = None
 
 # Read the input file in chunks using pandas, then convert each chunk to a Vaex DataFrame
 for chunk in pd.read_json(args.input, lines=True, chunksize=chunk_size):
-    df_vaex = df_vaex.concat(vaex.from_pandas(chunk, copy_index=False))
+    chunk_vaex = vaex.from_pandas(chunk, copy_index=False)
+    if df_vaex is None:
+        df_vaex = chunk_vaex
+    else:
+        df_vaex = df_vaex.concat(chunk_vaex)
 
 abs_output_path = os.path.abspath(args.output)
 if os.path.isfile(abs_output_path):
