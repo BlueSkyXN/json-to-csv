@@ -1,28 +1,33 @@
 import pandas as pd
 import argparse
+import csv
 from collections import Counter
 
-def chunks(iterable, size):
-    iterator = iter(iterable)
-    for first in iterator:
-        yield [first] + list(iter(iterator, size))
-
 def main(input_file, output_file, chunksize):
-    # 创建一个Counter对象来存储整个文件的统计
     total_counts = Counter()
 
     with open(input_file, 'r') as file:
+        reader = csv.reader(file)
+        
         # 获取列名
-        columns = file.readline().strip().split(',')
+        columns = next(reader)
         
         # 逐块读取文件
-        for chunk in chunks(file, chunksize):
-            # 将每个块转换为DataFrame
-            df = pd.DataFrame([line.strip().split(',') for line in chunk], columns=columns)
-            
-            # 统计"QH"列中域名的出现次数
+        chunk = []
+        for row in reader:
+            chunk.append(row)
+            if len(chunk) >= chunksize:
+                # 将每个块转换为DataFrame
+                df = pd.DataFrame(chunk, columns=columns)
+                # 统计"QH"列中域名的出现次数
+                total_counts.update(Counter(df['QH']))
+                chunk = []
+        
+        # 处理剩余的行
+        if chunk:
+            df = pd.DataFrame(chunk, columns=columns)
             total_counts.update(Counter(df['QH']))
-    
+
     # 将结果转换为DataFrame
     result_df = pd.DataFrame.from_dict(total_counts, orient='index').reset_index()
     result_df.columns = ['Domain', 'Count']
@@ -39,7 +44,7 @@ def main(input_file, output_file, chunksize):
 parser = argparse.ArgumentParser(description='统计域名出现次数')
 parser.add_argument('-i', '--input', type=str, required=True, help='Path to input CSV file')
 parser.add_argument('-o', '--output', type=str, required=True, help='Path to output CSV file')
-parser.add_argument('-s', '--chunksize', type=int, default=100000, help='Number of lines to process at a time')
+parser.add_argument('-s', '--chunksize', type=int, default=10000, help='Number of lines to process at a time')
 args = parser.parse_args()
 
 main(args.input, args.output, args.chunksize)
